@@ -1,0 +1,24 @@
+{
+  "name": "journal-server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "Ilya Baykalov",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bluebird": "*",
+    "cookie-parser": "*",
+    "cors": "^2.8.5",
+    "dateformat": "^3.0.3",
+    "debug": "*",
+    "express": "*",
+    "http-errors": "*",
+    "jade": "*",
+    "morgan": "*",
+    "pg-promise": "*",
+    "serve-favicon": "^2.5.0"
+  }
+}
