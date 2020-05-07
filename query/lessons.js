@@ -43,7 +43,7 @@ function updateLesson(req, res) {
 			homework: req.body.homework,
 			completed: req.body.completed,
 			lessonMark: req.body.lessonMark,
-			homeworkMark: req.body.homeworkMark
+			homeworkMark: req.body.homework ? req.body.homeworkMark : null
 		}
 	).then(result => {
 		if (result.rowCount === 1)
