@@ -35,7 +35,7 @@ function getAllData(req, res) {
 				FROM chapters ch
 				LEFT JOIN colors c ON c.id = ch.color_id
 				LEFT JOIN lessons l ON ch.id = l.chapter_id
-				ORDER BY ch.id`)
+				ORDER BY ch.id, l.id`)
 		.then(rawData => {
 			return rawData.map(data => {
 				return {
