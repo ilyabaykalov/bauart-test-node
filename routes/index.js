@@ -14,6 +14,8 @@ let chapter = require('../query/chapter'),
 router.get('/chapters/get', chapter.getAllChapters);
 router.get('/chapters', chapter.getAllData);
 router.post('/chapters', chapter.addChapter);
+// router.update('/chapters/:id', chapter.updateChapter);
+router.delete('/chapters/:id', chapter.deleteChapter);
 
 router.get('/colors', colors.getColors);
 
