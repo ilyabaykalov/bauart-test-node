@@ -90,18 +90,12 @@ function getAllData(req, res) {
 }
 
 function addChapter(req, res) {
-	db.none('INSERT INTO chapters(name, color_id) VALUES(${name}, ${colorId})', {
+	db.one('INSERT INTO chapters(name, color_id) VALUES(${name}, ${colorId}) RETURNING id, name, color_id', {
 		name: req.body.name,
 		colorId: req.body.colorId
-	}).then(() => {
+	}).then(chapter => {
 		res.status(res.statusCode)
-			.json({
-				status: 'success',
-				chapter: {
-					name: req.body.name,
-					colorId: req.body.colorId
-				}
-			});
+			.json(chapter);
 	}).catch(error => {
 		res.status(res.statusCode)
 			.json({
