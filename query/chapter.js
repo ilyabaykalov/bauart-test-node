@@ -6,6 +6,7 @@ module.exports = {
 	getAllChapters: getAllChapters,
 	getAllData: getAllData,
 	addChapter: addChapter,
+	updateChapter: updateChapter,
 	deleteChapter: deleteChapter
 };
 
@@ -95,7 +96,8 @@ function addChapter(req, res) {
 		'INSERT INTO chapters(name, color_id) VALUES(${name}, ${colorId}) RETURNING id, name, color_id', {
 			name: req.body.name,
 			colorId: req.body.colorId
-		}).then(chapter => {
+		}
+	).then(chapter => {
 		res.status(res.statusCode)
 			.json(chapter);
 	}).catch(error => {
@@ -107,15 +109,35 @@ function addChapter(req, res) {
 	});
 }
 
+function updateChapter(req, res) {
+	let id = req.params.id;
+
+	db.result(
+		'UPDATE chapters SET name=${name} WHERE id = ${id}', {
+			id: id,
+			name: req.body.name
+		}
+	).then(result => {
+		if (result.rowCount === 1)
+			res.status(res.statusCode).json();
+		else throw 'Не одна строка не была изменена';
+	}).catch(error => {
+		res.status(400)
+			.json({ error });
+	});
+}
+
 function deleteChapter(req, res) {
 	let id = req.params.id;
 
 	db.result(
 		'DELETE FROM chapters WHERE id = $1', id
 	).then(result => {
-		// rowCount = number of rows affected by the query
-		res.status(res.statusCode).json();
+		if (result.rowCount === 1)
+			res.status(res.statusCode).json();
+		else throw 'Не одна строка не была изменена';
 	}).catch(error => {
-		console.log('ERROR:', error);
+		res.status(400)
+			.json({ error });
 	});
 }
