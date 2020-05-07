@@ -5,7 +5,8 @@ let db = config.db;
 module.exports = {
 	getAllChapters: getAllChapters,
 	getAllData: getAllData,
-	addChapter: addChapter
+	addChapter: addChapter,
+	deleteChapter: deleteChapter
 };
 
 function getAllChapters(req, res) {
@@ -90,10 +91,11 @@ function getAllData(req, res) {
 }
 
 function addChapter(req, res) {
-	db.one('INSERT INTO chapters(name, color_id) VALUES(${name}, ${colorId}) RETURNING id, name, color_id', {
-		name: req.body.name,
-		colorId: req.body.colorId
-	}).then(chapter => {
+	db.one(
+		'INSERT INTO chapters(name, color_id) VALUES(${name}, ${colorId}) RETURNING id, name, color_id', {
+			name: req.body.name,
+			colorId: req.body.colorId
+		}).then(chapter => {
 		res.status(res.statusCode)
 			.json(chapter);
 	}).catch(error => {
@@ -103,16 +105,17 @@ function addChapter(req, res) {
 				error
 			});
 	});
-	// return db.(
-	// 	'INSERT INTO chapters ' +
-	// 	'(name, color_id) VALUES ' +
-	// 	'($1, $2)',
-	// 	[req.body.name, req.body.colorId])
-	// 	.catch(error => {
-	// 		res.status(res.statusCode)
-	// 			.json({
-	// 				status: 'error',
-	// 				error
-	// 			});
-	// 	});
+}
+
+function deleteChapter(req, res) {
+	let id = req.params.id;
+
+	db.result(
+		'DELETE FROM chapters WHERE id = $1', id
+	).then(result => {
+		// rowCount = number of rows affected by the query
+		res.status(res.statusCode).json();
+	}).catch(error => {
+		console.log('ERROR:', error);
+	});
 }
