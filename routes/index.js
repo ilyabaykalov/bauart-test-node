@@ -21,6 +21,7 @@ router.delete('/chapters/:id', chapter.deleteChapter);
 router.get('/colors', colors.getColors);
 
 router.post('/lessons', lessons.addLesson);
+router.patch('/lessons/:id', lessons.updateLesson);
 router.delete('/lessons/:id', lessons.deleteLesson);
 
 module.exports = router;

@@ -4,6 +4,7 @@ let db = config.db;
 
 module.exports = {
 	addLesson: addLesson,
+	updateLesson: updateLesson,
 	deleteLesson: deleteLesson
 };
 
@@ -30,9 +31,19 @@ function updateLesson(req, res) {
 	let id = req.params.id;
 
 	db.result(
-		'UPDATE chapters SET name=${name} WHERE id = ${id}', {
+		'UPDATE lessons ' +
+		'SET title=${title}, ' +
+		'homework=${homework}, ' +
+		'completed=${completed}, ' +
+		'lesson_mark=${lessonMark}, ' +
+		'homework_mark=${homeworkMark} ' +
+		'WHERE id = ${id}', {
 			id: id,
-			name: req.body.name
+			title: req.body.title,
+			homework: req.body.homework,
+			completed: req.body.completed,
+			lessonMark: req.body.lessonMark,
+			homeworkMark: req.body.homeworkMark
 		}
 	).then(result => {
 		if (result.rowCount === 1)
