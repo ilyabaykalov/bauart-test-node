@@ -62,7 +62,7 @@ function getAllData(req, res) {
 					id: data.id,
 					name: data.name,
 					colorId: data.colorId,
-					lessons: data.lesson ? [data.lesson] : null,
+					lessons: data.lesson ? [data.lesson] : [],
 					color: data.color
 				};
 			});
