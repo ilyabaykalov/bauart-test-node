@@ -22,6 +22,7 @@ router.get('/colors', colors.getColors);
 
 router.post('/lessons', lessons.addLesson);
 router.patch('/lessons/:id', lessons.updateLesson);
+router.patch('/lessons/link/:id', lessons.addLink);
 router.delete('/lessons/:id', lessons.deleteLesson);
 
 module.exports = router;

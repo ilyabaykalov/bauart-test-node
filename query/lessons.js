@@ -5,6 +5,7 @@ let db = config.db;
 module.exports = {
 	addLesson: addLesson,
 	updateLesson: updateLesson,
+	addLink: addLink,
 	deleteLesson: deleteLesson
 };
 
@@ -44,6 +45,26 @@ function updateLesson(req, res) {
 			completed: req.body.completed,
 			lessonMark: req.body.lessonMark,
 			homeworkMark: req.body.homework ? req.body.homeworkMark : null
+		}
+	).then(result => {
+		if (result.rowCount === 1)
+			res.status(res.statusCode).json();
+		else throw 'Не одна строка не была изменена';
+	}).catch(error => {
+		res.status(400)
+			.json({ error });
+	});
+}
+
+function addLink(req, res) {
+	let id = req.params.id;
+
+	db.result(
+		'UPDATE lessons ' +
+		'SET git_link=${gitLink} ' +
+		'WHERE id = ${id}', {
+			id: id,
+			gitLink: req.body.gitLink
 		}
 	).then(result => {
 		if (result.rowCount === 1)

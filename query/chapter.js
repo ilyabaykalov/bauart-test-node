@@ -31,7 +31,7 @@ function getAllData(req, res) {
 		`SELECT 
 				ch.id, ch.name AS chapter_name, ch.color_id,
 				c.id AS color_id, c.hex, c.name AS color_name,
-				l.id AS lesson_id, l.chapter_id, l.title, l.homework, l.completed, l.lesson_mark, l.homework_mark
+				l.id AS lesson_id, l.chapter_id, l.title, l.homework, l.completed, l.lesson_mark, l.homework_mark, l.git_link
 				FROM chapters ch
 				LEFT JOIN colors c ON c.id = ch.color_id
 				LEFT JOIN lessons l ON ch.id = l.chapter_id
@@ -47,6 +47,7 @@ function getAllData(req, res) {
 						chapterId: data.chapter_id,
 						title: data.title,
 						homework: data.homework,
+						gitLink: data.git_link,
 						completed: data.completed,
 						lessonMark: data.lesson_mark,
 						homeworkMark: data.homework_mark
