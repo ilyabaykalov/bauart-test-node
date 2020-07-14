@@ -1,0 +1,28 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	text-align: center;
+	font-size: 32pt;
+	font-family: monaco, monospace;
+	font-weight: bold;
+	color: #68A063;
+}
+
+.core {
+	width: 600px;
+	margin: auto;
+}
+
+.additional {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 50px;
+}
+
+.additional img {
+	width: 300px;
+}
+

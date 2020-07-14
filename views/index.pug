@@ -2,7 +2,13 @@ doctype html
 html
     head
         title= title
-        link(rel='stylesheet', href='/style.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
     body
         block content
-            h1= `${ title } is running`
+            .container
+                h1.header=`${ title } is running`
+                img.core(src='/images/core/node-js-logo.png')
+                .additional
+                    img(src='/images/additional/express-js-logo.png')
+                    img(src='/images/additional/socket-io-logo.png')
+                    img(src='/images/additional/redis-logo.png')
