@@ -12,8 +12,10 @@ function addAPOD(req, res) {
   const explanation = req.body.explanation;
   const url = req.body.url;
 
-  const jsonPath = `./output/apod_${ new Date().toISOString() }.json`;
-  const imagePath = `./output/apod_${ new Date().toISOString() }.png`;
+  const date = new Date().toISOString();
+
+  const jsonPath = `./output/apod_${ date }.json`;
+  const imagePath = `./output/apod_${ date }.png`;
 
   if (!fs.existsSync('output')) {
     fs.mkdirSync('output');
@@ -41,8 +43,10 @@ function addAPOD(req, res) {
 function addEarth(req, res) {
   const url = req.body.url;
 
-  const jsonPath = `./output/earth_${ new Date().toISOString() }.json`;
-  const imagePath = `./output/earth_${ new Date().toISOString() }.png`;
+  const date = new Date().toISOString();
+
+  const jsonPath = `./output/earth_${ date }.json`;
+  const imagePath = `./output/earth_${ date }.png`;
 
   if (!fs.existsSync('output')) {
     fs.mkdirSync('output');
@@ -60,7 +64,6 @@ function addEarth(req, res) {
 
   res.status(res.statusCode)
       .json({
-        jsonPath,
         imagePath
       });
 }
@@ -68,7 +71,9 @@ function addEarth(req, res) {
 function addMars(req, res) {
   const result = req.body.result;
 
-  const jsonPath = `./output/mars_weather_${ new Date().toISOString() }.json`;
+  const date = new Date().toISOString();
+
+  const jsonPath = `./output/mars_weather_${ date }.json`;
 
   if (!fs.existsSync('output')) {
     fs.mkdirSync('output');

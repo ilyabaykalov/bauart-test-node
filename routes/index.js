@@ -1,13 +1,39 @@
 let router = require('express').Router();
 
-router.get('/', function(req, res) {
-	res.render('index', { title: 'Bauart test server' });
+router.get('/', (req, res) => {
+  res.render('index', { title: 'Bauart test server' });
 });
 
-let data = require('../query/data');
+const redis = require('redis').createClient();
+redis.on('connect', () => {
+  console.log('Connected to Redis...');
+});
 
-router.post('/apod', data.addAPOD);
-router.post('/earth', data.addEarth);
-router.post('/mars', data.addMars);
+const NASA = require('../query/nasa');
 
-module.exports = router;
+router.post('/apod', NASA.addAPOD);
+router.post('/earth', NASA.addEarth);
+router.post('/mars', NASA.addMars);
+
+const io = require('socket.io')();
+
+io.on('connection', (socket) => {
+  console.log('Connected to Socket.io...');
+
+  socket.on('disconnect', () => {
+    console.log('Disconnected from Socket.io...');
+  });
+
+  socket.on('message', (message) => {
+    console.log('server on -', message);
+
+    io.sockets.emit('message', {
+      name: message.name,
+      date: new Date(),
+      text: message.text
+    });
+    console.log('server emit -', message);
+  });
+});
+
+module.exports = { router, io };
