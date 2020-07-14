@@ -1,25 +1,35 @@
 {
-	"name": "journal-server",
+	"name": "node-server",
+	"description": "Pure Node.js server",
 	"version": "1.0.0",
-	"main": "app.js",
-	"author": "Ilya Baykalov",
-	"license": "ISC",
-	"private": true,
+	"main": "",
 	"scripts": {
-		"start": "node bin/www.js"
+		"start": "node ./bin/www"
 	},
+	"author": {
+		"name": "Ilya Baykalov",
+		"email": "enot_boris@icloud.com",
+		"web": "vk.com/ilyabaykalov"
+	},
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ilyabaykalov/node-server.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ilyabaykalov/node-server/issues"
+	},
+	"homepage": "https://github.com/ilyabaykalov/node-server#readme",
 	"dependencies": {
-		"bluebird": "*",
+		"bluebird": "^3.7.2",
 		"body-parser": "^1.19.0",
-		"cookie-parser": "*",
+		"cookie-parser": "^1.4.5",
 		"cors": "^2.8.5",
 		"dateformat": "^3.0.3",
-		"debug": "*",
-		"express": "*",
-		"http-errors": "*",
-		"jade": "*",
-		"morgan": "*",
-		"pg-promise": "*",
+		"express": "^4.17.1",
+		"http-errors": "^1.8.0",
+		"pug": "^3.0.0",
+		"morgan": "^1.10.0",
 		"request": "^2.88.2",
 		"serve-favicon": "^2.5.0",
 		"socket.io": "^2.3.0",
