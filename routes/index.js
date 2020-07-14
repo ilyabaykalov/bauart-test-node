@@ -21,21 +21,16 @@ io.on('connection', (socket) => {
   console.log('Connected to Socket.io...');
 
   socket.on('disconnect', () => {
-    console.log('Disconnected from Socket.io...', socket);
+    console.log('Disconnected from Socket.io...');
   });
 
-  socket.on('userJoined', (user, callback) => {
+  socket.on('userJoined', (user) => {
     socket.join(user.room);
     socket.broadcast.to(user.room)
         .emit('message', {
           name: user.name,
           text: `присоединился к ${ user.room }`
         });
-
-    return callback({
-      message: `Привет ${ user.name }`,
-      userId: socket.id
-    });
   });
 
   socket.on('message', (message) => {
