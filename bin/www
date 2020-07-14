@@ -9,6 +9,4 @@ app.io.attach(server);
 const port = 3000;
 app.set('port', port);
 
-server.listen(port, () => {
-  console.log('listen 3000 port');
-});
+server.listen(port);

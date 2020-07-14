@@ -39,14 +39,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('message', (message) => {
-    console.log('server on -', message);
-
     io.sockets.to(message.room).emit('message', {
       name: message.name,
       date: new Date(),
       text: message.text
     });
-    console.log('server emit -', message);
   });
 });
 
